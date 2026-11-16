@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Word Censor</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <div class="card">
+    <h1>Word Censor</h1>
+    <p class="sub">Type a sentence and the banned words are masked with asterisks.</p>
+    <div class="chips" id="chips"></div>
+
+    <label for="input">Your text</label>
+    <textarea id="input" placeholder></textarea>
+
+    <button id="go">Censor</button>
+    <button id="clear" class="ghost">Clear</button>
+
+    <label>Result</label>
+    <div id="output" aria-live="polite">Your censored text will appear here.</div>
+    <div id="count"></div>
+  </div>
+</main>
+
+</body>
+</html>
+<script>
+    const BANNED = ["crazy", "stupid", "idiot", "mad"];
+const regex = new RegExp("\\b(" + BANNED.join("|") + ")\\b", "gi");
+const input = document.getElementById("input");
+const output = document.getElementById("output");
+const count = document.getElementById("count");
+
+document.getElementById("chips").innerHTML =
+  BANNED.map(w => '<span class="chip">' + w + '</span>').join("");
+
+function censor() {
+  let n = 0;
+  const result = input.value.replace(regex, m => { n++; return "*".repeat(m.length); });
+  output.textContent = result || "Your censored text will appear here.";
+  count.textContent = input.value ? n + " word" + (n === 1 ? "" : "s") + " censored" : "";
+}
+
+document.getElementById("go").addEventListener("click", censor);
+input.addEventListener("input", censor);
+document.getElementById("clear").addEventListener("click", () => {
+  input.value = ""; censor(); input.focus();
+});
+</script>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Split Word Assignment</title>
+<style>
+  body{font-family: sans-serif; display:flex; justify-content:center; margin-top:50px;}
+  .box{background:#f0f0f0; padding:20px; border-radius:10px; width:300px; text-align:center;}
+  input{padding:10px; width:90%; font-size:16px;}
+  button{padding:10px 20px; margin-top:10px; background:rebeccapurple; color:white; border:none; border-radius:5px; cursor:pointer; font-size:16px;}
+  #output{margin-top:15px; background:white; padding:15px; border-radius:5px; min-height:40px; font-weight:bold; font-size:18px;}
+</style>
+</head>
+<body>
+<div class="box">
+  <h3>Split Word</h3>
+  <input type="text" id="myInput" placeholder="Enter a word">
+  <button onclick="splitWord()">Submit</button>
+  <div id="output"></div>
+</div>
+
+
+</body>
+</html>
+<script>
+function splitWord() {
+  let word = document.getElementById("myInput").value.trim();
+  let outputDiv = document.getElementById("output");
+
+  if (word === "") {
+    outputDiv.innerHTML = "Please enter a word";
+    return;
+  }
+
+  // Remove spaces - keep only letters
+  word = word.replace(/\s/g, "");
+
+  let len = word.length;
+  let mid = Math.ceil(len / 2); // ceil makes first part bigger if odd
+
+  let firstHalf = word.slice(0, mid);
+  let secondHalf = word.slice(mid);
+
+//   outputDiv.innerHTML = First: ${firstHalf} <br> Second: ${secondHalf};
+
+
+}
+</script>
