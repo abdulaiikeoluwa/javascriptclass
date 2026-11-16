@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <input type="number" id="num1" min="1" max="30" placeholder="1 - 30">
+   <input type="number" id="num2" min="1" max="30" placeholder="1 - 30"> 
+</body>
+</html>
+<script>
+    function limitValue(input) {
+    if (input.value === "") return;          // allow empty while typing
+    let value = parseInt(input.value, 10);
+    if (isNaN(value) || value < 1) value = 1;
+    if (value > 30) value = 30;
+    input.value = value;
+  }
+
+  ["num1", "num2"].forEach(id => {
+    const input = document.getElementById(id);
+    input.addEventListener("input", () => limitValue(input));
+    input.addEventListener("blur", () => limitValue(input));
+  });
+</script>
